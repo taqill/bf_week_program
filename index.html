@@ -1,257 +1,258 @@
+
 <style>
-  * { box-sizing: border-box; }
-  .prog { padding: 1rem 0 1.5rem; }
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700&display=swap');
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  .prog { font-family: 'Noto Sans Thai', sans-serif; padding: 1rem 0 1.5rem; }
   .tabs { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; margin-bottom: 16px; }
-  .tab { padding: 8px 4px; border-radius: var(--border-radius-md); border: 0.5px solid var(--color-border-tertiary); background: var(--color-background-secondary); font-size: 11px; font-weight: 500; color: var(--color-text-secondary); cursor: pointer; text-align: center; transition: all .15s; }
-  .tab-sub { font-size: 9px; font-weight: 400; opacity: .7; display: block; margin-top: 1px; }
-  .act-purple { background:#EEEDFE; color:#3C3489; border-color:#AFA9EC; }
+  .tab { padding: 8px 4px; border-radius: 10px; border: 0.5px solid var(--color-border-tertiary, #e0ddd5); background: var(--color-background-secondary, #f5f4ef); font-size: 11px; font-weight: 500; color: var(--color-text-secondary, #888); cursor: pointer; text-align: center; transition: all .15s; font-family: 'Noto Sans Thai', sans-serif; }
+  .tab-sub { font-size: 9px; font-weight: 400; opacity: .75; display: block; margin-top: 2px; }
+  .act-green  { background:#E5F5EC; color:#0A5C2E; border-color:#7DCCA0; }
   .act-pink   { background:#FBEAF0; color:#72243E; border-color:#F4C0D1; }
-  .act-teal   { background:#E1F5EE; color:#085041; border-color:#5DCAA5; }
-  .act-gray   { background:#F1EFE8; color:#444441; border-color:#D3D1C7; }
   .act-red    { background:#FCEBEB; color:#A32D2D; border-color:#F7C1C1; }
+  .act-blue   { background:#E5EEF9; color:#1A3F72; border-color:#8DB6E5; }
   .act-amber  { background:#FAEEDA; color:#633806; border-color:#FAC775; }
-  .act-rest   { background:#F1EFE8; color:#444441; border-color:#D3D1C7; }
+  .act-orange { background:#FFF0E5; color:#8C3A00; border-color:#FFC49A; }
+  .act-gray   { background:#F1EFE8; color:#444441; border-color:#D3D1C7; }
   .panel { display: none; }
   .panel.show { display: block; }
-  .focus-bar { border-radius: var(--border-radius-md); padding: 10px 14px; margin-bottom: 14px; font-size: 12px; display: flex; gap: 10px; align-items: center; border: 0.5px solid; }
-  .fb-purple { background:#EEEDFE; color:#3C3489; border-color:#AFA9EC; }
+  .focus-bar { border-radius: 10px; padding: 11px 14px; margin-bottom: 14px; font-size: 12px; display: flex; gap: 10px; align-items: center; border: 0.5px solid; line-height: 1.5; }
+  .fb-green  { background:#E5F5EC; color:#0A5C2E; border-color:#7DCCA0; }
   .fb-pink   { background:#FBEAF0; color:#72243E; border-color:#F4C0D1; }
-  .fb-teal   { background:#E1F5EE; color:#085041; border-color:#5DCAA5; }
-  .fb-gray   { background:#F1EFE8; color:#5F5E5A; border-color:#D3D1C7; }
   .fb-red    { background:#FCEBEB; color:#A32D2D; border-color:#F7C1C1; }
+  .fb-blue   { background:#E5EEF9; color:#1A3F72; border-color:#8DB6E5; }
   .fb-amber  { background:#FAEEDA; color:#633806; border-color:#FAC775; }
-  .focus-icon { font-size: 18px; flex-shrink: 0; }
-  .section-head { font-size: 11px; font-weight: 500; color: var(--color-text-tertiary); letter-spacing:.06em; text-transform:uppercase; margin: 14px 0 4px; }
-  .ex-row { display: grid; grid-template-columns: 28px 1fr auto; align-items: start; gap: 10px; padding: 11px 0; border-bottom: 0.5px solid var(--color-border-tertiary); }
+  .fb-orange { background:#FFF0E5; color:#8C3A00; border-color:#FFC49A; }
+  .fb-gray   { background:#F1EFE8; color:#5F5E5A; border-color:#D3D1C7; }
+  .focus-icon { font-size: 20px; flex-shrink: 0; }
+  .section-head { font-size: 10px; font-weight: 600; color: var(--color-text-tertiary, #aaa); letter-spacing:.08em; text-transform:uppercase; margin: 14px 0 4px; }
+  .ex-row { display: grid; grid-template-columns: 28px 1fr auto; align-items: start; gap: 10px; padding: 11px 0; border-bottom: 0.5px solid var(--color-border-tertiary, #e8e5de); }
   .ex-row:last-child { border-bottom: none; }
-  .ex-num { width:28px; height:28px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:500; flex-shrink:0; margin-top:1px; }
-  .n-purple { background:#EEEDFE; color:#3C3489; }
+  .ex-num { width:28px; height:28px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:600; flex-shrink:0; margin-top:1px; }
+  .n-green  { background:#E5F5EC; color:#0A5C2E; }
   .n-pink   { background:#FBEAF0; color:#72243E; }
-  .n-teal   { background:#E1F5EE; color:#085041; }
-  .n-gray   { background:#F1EFE8; color:#444441; }
   .n-red    { background:#FCEBEB; color:#A32D2D; }
-  .n-amber  { background:#FAEEDA; color:#633806; }
-  .ex-name { font-size:14px; font-weight:500; color:var(--color-text-primary); margin-bottom:3px; }
-  .ex-alt  { font-size:11px; color:var(--color-text-tertiary); margin-bottom:4px; }
+  .n-blue   { background:#E5EEF9; color:#1A3F72; }
+  .n-orange { background:#FFF0E5; color:#8C3A00; }
+  .n-gray   { background:#F1EFE8; color:#444441; }
+  .ex-name { font-size:14px; font-weight:600; color:var(--color-text-primary, #1a1a17); margin-bottom:2px; }
+  .ex-alt  { font-size:11px; color:var(--color-text-tertiary, #999); margin-bottom:4px; line-height:1.4; }
   .ex-tags { display:flex; gap:4px; flex-wrap:wrap; }
   .tag { font-size:10px; padding:2px 7px; border-radius:20px; }
-  .tag-m { background:var(--color-background-secondary); color:var(--color-text-secondary); border:0.5px solid var(--color-border-tertiary); }
-  .tag-t { background:#FCEBEB; color:#A32D2D; border:0.5px solid #F09595; }
-  .ex-sets { text-align:right; font-size:13px; font-weight:500; color:var(--color-text-primary); white-space:nowrap; flex-shrink:0; }
-  .ex-reps { font-size:11px; color:var(--color-text-secondary); text-align:right; }
-  .rest-note { background:var(--color-background-secondary); border-radius:var(--border-radius-md); padding:10px 14px; margin-top:14px; font-size:12px; color:var(--color-text-secondary); border:0.5px solid var(--color-border-tertiary); }
-  .rest-big { text-align:center; padding: 32px 16px; color:var(--color-text-secondary); font-size:14px; line-height:1.8; }
+  .tag-m { background:var(--color-background-secondary, #f5f4ef); color:var(--color-text-secondary, #666); border:0.5px solid var(--color-border-tertiary, #e0ddd5); }
+  .tag-t { background:#FFF0E5; color:#8C3A00; border:0.5px solid #FFC49A; }
+  .tag-fire { background:#FCEBEB; color:#A32D2D; border:0.5px solid #F7C1C1; }
+  .ex-sets { text-align:right; font-size:13px; font-weight:600; color:var(--color-text-primary, #1a1a17); white-space:nowrap; flex-shrink:0; }
+  .ex-reps { font-size:11px; color:var(--color-text-secondary, #888); text-align:right; }
+  .rest-note { background:var(--color-background-secondary, #f5f4ef); border-radius:10px; padding:10px 14px; margin-top:14px; font-size:12px; color:var(--color-text-secondary, #666); border:0.5px solid var(--color-border-tertiary, #e0ddd5); line-height:1.6; }
+  .rest-big { text-align:center; padding: 32px 16px; color:var(--color-text-secondary, #888); font-size:14px; line-height:2; }
   .rest-emoji { font-size:40px; display:block; margin-bottom:10px; }
+  .cardio-block { background: linear-gradient(135deg, #FBEAF0 0%, #E5EEF9 100%); border-radius:12px; padding:14px; margin-bottom:10px; border:0.5px solid #F4C0D1; }
+  .cardio-title { font-size:13px; font-weight:600; color:#72243E; margin-bottom:4px; }
+  .cardio-sub { font-size:11px; color:#6A3A5A; line-height:1.5; }
+  .tip-bar { background:#E5F5EC; border:0.5px solid #7DCCA0; border-radius:10px; padding:10px 14px; margin-bottom:12px; font-size:11px; color:#0A5C2E; line-height:1.6; }
+  .tip-bar-blue { background:#E5EEF9; border:0.5px solid #8DB6E5; border-radius:10px; padding:10px 14px; margin-bottom:12px; font-size:11px; color:#1A3F72; line-height:1.6; }
 
   @media (prefers-color-scheme: dark) {
-    .act-purple { background:#26215C; color:#AFA9EC; border-color:#534AB7; }
+    .act-green  { background:#0A3D1E; color:#7DCCA0; border-color:#1A6B3C; }
     .act-pink   { background:#4B1528; color:#ED93B1; border-color:#993556; }
-    .act-teal   { background:#04342C; color:#5DCAA5; border-color:#0F6E56; }
-    .act-gray   { background:#2C2C2A; color:#B4B2A9; border-color:#5F5E5A; }
     .act-red    { background:#501313; color:#F09595; border-color:#A32D2D; }
+    .act-blue   { background:#0D2545; color:#8DB6E5; border-color:#1A4A8A; }
     .act-amber  { background:#412402; color:#EF9F27; border-color:#854F0B; }
-    .fb-purple { background:#26215C; color:#AFA9EC; border-color:#534AB7; }
-    .fb-pink   { background:#4B1528; color:#ED93B1; border-color:#993556; }
-    .fb-teal   { background:#04342C; color:#5DCAA5; border-color:#0F6E56; }
-    .fb-gray   { background:#2C2C2A; color:#B4B2A9; border-color:#5F5E5A; }
-    .fb-red    { background:#501313; color:#F09595; border-color:#A32D2D; }
-    .fb-amber  { background:#412402; color:#EF9F27; border-color:#854F0B; }
-    .n-purple { background:#26215C; color:#AFA9EC; }
+    .act-orange { background:#3D1A00; color:#FFB37A; border-color:#8C3A00; }
+    .act-gray   { background:#2C2C2A; color:#B4B2A9; border-color:#5F5E5A; }
+    .fb-green   { background:#0A3D1E; color:#7DCCA0; border-color:#1A6B3C; }
+    .fb-pink    { background:#4B1528; color:#ED93B1; border-color:#993556; }
+    .fb-red     { background:#501313; color:#F09595; border-color:#A32D2D; }
+    .fb-blue    { background:#0D2545; color:#8DB6E5; border-color:#1A4A8A; }
+    .fb-amber   { background:#412402; color:#EF9F27; border-color:#854F0B; }
+    .fb-orange  { background:#3D1A00; color:#FFB37A; border-color:#8C3A00; }
+    .fb-gray    { background:#2C2C2A; color:#B4B2A9; border-color:#5F5E5A; }
+    .n-green  { background:#0A3D1E; color:#7DCCA0; }
     .n-pink   { background:#4B1528; color:#ED93B1; }
-    .n-teal   { background:#04342C; color:#5DCAA5; }
-    .n-gray   { background:#2C2C2A; color:#B4B2A9; }
     .n-red    { background:#501313; color:#F09595; }
-    .n-amber  { background:#412402; color:#EF9F27; }
+    .n-blue   { background:#0D2545; color:#8DB6E5; }
+    .n-orange { background:#3D1A00; color:#FFB37A; }
+    .n-gray   { background:#2C2C2A; color:#B4B2A9; }
+    .cardio-block { background: #2A1025; border-color:#993556; }
+    .cardio-title { color:#ED93B1; }
+    .cardio-sub { color:#9A6A8A; }
+    .tip-bar { background:#0A3D1E; border-color:#1A6B3C; color:#7DCCA0; }
+    .tip-bar-blue { background:#0D2545; border-color:#1A4A8A; color:#8DB6E5; }
   }
 </style>
 
 <div class="prog">
   <div class="tabs">
-    <div class="tab act-purple" id="tab-0" onclick="show(0)">จันทร์<span class="tab-sub">Full A</span></div>
+    <div class="tab act-green" id="tab-0" onclick="show(0)">จันทร์<span class="tab-sub">บน A</span></div>
     <div class="tab" id="tab-1" onclick="show(1)">อังคาร<span class="tab-sub">คาร์ดิโอ</span></div>
-    <div class="tab" id="tab-2" onclick="show(2)">พุธ<span class="tab-sub">Full B</span></div>
-    <div class="tab" id="tab-3" onclick="show(3)">พฤหัส<span class="tab-sub">ยืดเหยียด</span></div>
-    <div class="tab" id="tab-4" onclick="show(4)">ศุกร์<span class="tab-sub">Full C</span></div>
-    <div class="tab" id="tab-5" onclick="show(5)">เสาร์<span class="tab-sub">ปาร์ตี้</span></div>
+    <div class="tab" id="tab-2" onclick="show(2)">พุธ<span class="tab-sub">Full</span></div>
+    <div class="tab" id="tab-3" onclick="show(3)">พฤหัส<span class="tab-sub">คาร์ดิโอ</span></div>
+    <div class="tab" id="tab-4" onclick="show(4)">ศุกร์<span class="tab-sub">ปาร์ตี้</span></div>
+    <div class="tab" id="tab-5" onclick="show(5)">เสาร์<span class="tab-sub">ล่าง A</span></div>
     <div class="tab" id="tab-6" onclick="show(6)">อาทิตย์<span class="tab-sub">พัก</span></div>
   </div>
 
+  <!-- MON: Upper A -->
   <div class="panel show" id="panel-0">
-    <div class="focus-bar fb-purple"><span class="focus-icon">🍑</span><span><strong>Full Body A — เผาผลาญ & สร้างฐานล่าง</strong></span></div>
-    <div class="section-head">Compound</div>
+    <div class="focus-bar fb-green"><span class="focus-icon">💪</span><div><strong>Upper Body A — แขนเล็ก เอวดูคอด</strong><br><span style="font-size:11px;opacity:.8">Machine + Cable ทั้งหมด · ~45 นาที</span></div></div>
+    <div class="tip-bar">💡 <strong>เทคนิคเอวดูเล็ก:</strong> ฝึก lat (ปีกหลัง) ให้กว้าง + ไหล่ให้มีมิติ ร่างกายจะดู hourglass โดยอัตโนมัติ</div>
+    <div class="section-head">Main — หลัง ไหล่ แขน</div>
     <div class="ex-row">
-      <div class="ex-num n-purple">1</div>
-      <div><div class="ex-name">Goblet Squat</div><div class="ex-alt">ถือดัมเบล 1 ลูกไว้ที่อก</div><div class="ex-tags"><span class="tag tag-m">หน้าขา</span><span class="tag tag-m">ก้น</span><span class="tag tag-t">เข่าชี้ตามปลายเท้า</span></div></div>
-      <div><div class="ex-sets">3 เซต</div><div class="ex-reps">10–12 ครั้ง</div></div>
+      <div class="ex-num n-green">1</div>
+      <div><div class="ex-name">Lat Pulldown Machine</div><div class="ex-alt">ดึงบาร์ลงเข้าหาอก แอ่นอกเล็กน้อย (ปีกหลังกว้าง = เอวดูคอด)</div><div class="ex-tags"><span class="tag tag-m">ปีกหลัง</span><span class="tag tag-t">ช่วยให้เอวดูเล็กลง</span></div></div>
+      <div><div class="ex-sets">4 เซต</div><div class="ex-reps">12–15 ครั้ง</div></div>
     </div>
     <div class="ex-row">
-      <div class="ex-num n-purple">2</div>
-      <div><div class="ex-name">Lat Pulldown</div><div class="ex-alt">ดึงสายเคเบิลลงเข้าหาอก (ช่วยให้เอวดูคอดขึ้น)</div><div class="ex-tags"><span class="tag tag-m">ปีกหลัง</span><span class="tag tag-t">แอ่นอกรับ</span></div></div>
-      <div><div class="ex-sets">3 เซต</div><div class="ex-reps">10–12 ครั้ง</div></div>
-    </div>
-    <div class="ex-row">
-      <div class="ex-num n-purple">3</div>
-      <div><div class="ex-name">DB Chest Press</div><div class="ex-alt">นอนบนม้านั่งดันดัมเบล (ช่วยกระชับเนินอก)</div><div class="ex-tags"><span class="tag tag-m">อก</span><span class="tag tag-m">ไหล่หน้า</span><span class="tag tag-m">หลังแขน</span></div></div>
-      <div><div class="ex-sets">3 เซต</div><div class="ex-reps">10–12 ครั้ง</div></div>
-    </div>
-    <div class="section-head">Accessory & Core</div>
-    <div class="ex-row">
-      <div class="ex-num n-purple">4</div>
-      <div><div class="ex-name">Leg Curl Machine</div><div class="ex-alt">เครื่องพับขา (ลดเซลลูไลท์หลังต้นขา)</div><div class="ex-tags"><span class="tag tag-m">หลังขา</span></div></div>
+      <div class="ex-num n-green">2</div>
+      <div><div class="ex-name">Seated Cable Row</div><div class="ex-alt">ดึงสายเข้าหาท้อง ไหล่หายไปด้านหลัง (แก้หลังค่อม ปรับบุคลิก)</div><div class="ex-tags"><span class="tag tag-m">หลังกลาง</span><span class="tag tag-m">หน้าแขน</span></div></div>
       <div><div class="ex-sets">3 เซต</div><div class="ex-reps">12–15 ครั้ง</div></div>
     </div>
     <div class="ex-row">
-      <div class="ex-num n-purple">5</div>
-      <div><div class="ex-name">Plank</div><div class="ex-alt">เกร็งหน้าท้อง หายใจปกติ</div><div class="ex-tags"><span class="tag tag-m">Core</span><span class="tag tag-t">สะโพกไม่ยกสูง</span></div></div>
-      <div><div class="ex-sets">3 เซต</div><div class="ex-reps">30–45 วิ</div></div>
+      <div class="ex-num n-green">3</div>
+      <div><div class="ex-name">Shoulder Press Machine</div><div class="ex-alt">ดันขึ้นเหนือหัว ไหล่มีมิติช่วยให้แขนดูเรียวขึ้น</div><div class="ex-tags"><span class="tag tag-m">ไหล่</span></div></div>
+      <div><div class="ex-sets">3 เซต</div><div class="ex-reps">12–15 ครั้ง</div></div>
     </div>
-    <div class="rest-note">⏱ พักระหว่างเซต 60–90 วิ · เลือกน้ำหนักที่รู้สึกตึงตอนครั้งที่ 8-10</div>
+    <div class="ex-row">
+      <div class="ex-num n-green">4</div>
+      <div><div class="ex-name">Tricep Pushdown (Cable)</div><div class="ex-alt">กดสายเคเบิลลง ศอกชิดลำตัว (แก้ท้องแขนห้อย)</div><div class="ex-tags"><span class="tag tag-m">หลังแขน</span><span class="tag tag-fire">จุดสะสมไขมัน</span></div></div>
+      <div><div class="ex-sets">3 เซต</div><div class="ex-reps">15–20 ครั้ง</div></div>
+    </div>
+    <div class="ex-row">
+      <div class="ex-num n-green">5</div>
+      <div><div class="ex-name">Cable Bicep Curl</div><div class="ex-alt">ยืนม้วนแขนขึ้น สายเคเบิล (แขนหน้ากระชับ)</div><div class="ex-tags"><span class="tag tag-m">หน้าแขน</span></div></div>
+      <div><div class="ex-sets">3 เซต</div><div class="ex-reps">15 ครั้ง</div></div>
+    </div>
+    <div class="ex-row">
+      <div class="ex-num n-green">6</div>
+      <div><div class="ex-name">Cable Lateral Raise</div><div class="ex-alt">ยืนข้างเครื่อง กางแขนขึ้น (ไหล่กว้าง = เอวดูเล็ก)</div><div class="ex-tags"><span class="tag tag-m">ไหล่ข้าง</span><span class="tag tag-t">น้ำหนักเบามาก</span></div></div>
+      <div><div class="ex-sets">3 เซต</div><div class="ex-reps">15–20 ครั้ง</div></div>
+    </div>
+    <div class="rest-note">⏱ พักระหว่างเซต 60 วิ · รวม ~45–50 นาที</div>
   </div>
 
+  <!-- TUE: Cardio -->
   <div class="panel" id="panel-1">
-    <div class="focus-bar fb-pink"><span class="focus-icon">🚶‍♀️</span><span><strong>คาร์ดิโอเบา — เผาผลาญไขมันเพิ่ม</strong> · ช่วยฟื้นฟูกล้ามเนื้อจากวันจันทร์</span></div>
-    <div class="section-head">เลือกอย่างใดอย่างหนึ่ง</div>
-    <div class="ex-row">
-      <div class="ex-num n-pink">1</div>
-      <div><div class="ex-name">เดินชันบนลู่วิ่ง (Incline Walk)</div><div class="ex-alt">ปรับความชัน 5–8% เดินเร็วพอให้เหงื่อซึม</div><div class="ex-tags"><span class="tag tag-m">Zone 2</span><span class="tag tag-t">เซฟข้อเข่า</span></div></div>
-      <div><div class="ex-sets">1 เซต</div><div class="ex-reps">30–40 นาที</div></div>
+    <div class="focus-bar fb-pink"><span class="focus-icon">🔥</span><div><strong>คาร์ดิโอ — เผาไขมัน</strong><br><span style="font-size:11px;opacity:.8">วันนี้ไม่ยกเวท เน้นเผาผลาญ 100%</span></div></div>
+    <div class="cardio-block">
+      <div class="cardio-title">🚶 Incline Treadmill Walk — 30–40 นาที</div>
+      <div class="cardio-sub">ความชัน 6–10% · ความเร็ว 5–6 km/h · หัวใจ 120–135 bpm<br>Zone 2 เผาไขมันได้ดีที่สุด ขาไม่ล้า</div>
     </div>
-    <div class="ex-row">
-      <div class="ex-num n-pink">2</div>
-      <div><div class="ex-name">ปั่นจักรยาน หรือ Elliptical</div><div class="ex-alt">เครื่องปั่นแบบไม่มีแรงกระแทก</div><div class="ex-tags"><span class="tag tag-m">Low Impact</span></div></div>
-      <div><div class="ex-sets">1 เซต</div><div class="ex-reps">30–40 นาที</div></div>
+    <div class="cardio-block">
+      <div class="cardio-title">🚴 Bike / Elliptical — 15–20 นาที (ต่อเพิ่มได้)</div>
+      <div class="cardio-sub">ต่อหลัง incline walk ได้เลย หรือสลับกันในวีคถัดไป</div>
     </div>
-    <div class="rest-note">⏱ รวม 30–40 นาที · ไม่ต้องฝืนวิ่งหนัก เก็บแรงไว้ยกเวทวันพุธ</div>
+    <div class="rest-note">⏱ รวม 40–50 นาที · กินโปรตีนหลังคาร์ดิโอด้วย เพื่อรักษากล้ามเนื้อ</div>
   </div>
 
+  <!-- WED: Full -->
   <div class="panel" id="panel-2">
-    <div class="focus-bar fb-teal"><span class="focus-icon">⏳</span><span><strong>Full Body B — Hinge & Posture</strong> · เน้นก้น ปรับบุคลิก และกระชับแขน</span></div>
-    <div class="section-head">Compound</div>
-    <div class="ex-row">
-      <div class="ex-num n-teal">1</div>
-      <div><div class="ex-name">DB Romanian Deadlift (RDL)</div><div class="ex-alt">พับสะโพกไปด้านหลัง น้ำหนักลงส้นเท้า</div><div class="ex-tags"><span class="tag tag-m">ก้น</span><span class="tag tag-m">หลังขา</span><span class="tag tag-t">หลังตรงตลอด</span></div></div>
-      <div><div class="ex-sets">3 เซต</div><div class="ex-reps">10–12 ครั้ง</div></div>
-    </div>
-    <div class="ex-row">
-      <div class="ex-num n-teal">2</div>
-      <div><div class="ex-name">Seated Cable Row</div><div class="ex-alt">ดึงเข้าหาท้อง (ช่วยยืดไหล่ แก้หลังค่อม)</div><div class="ex-tags"><span class="tag tag-m">หลังกลาง</span><span class="tag tag-m">หน้าแขน</span></div></div>
-      <div><div class="ex-sets">3 เซต</div><div class="ex-reps">10–12 ครั้ง</div></div>
-    </div>
-    <div class="ex-row">
-      <div class="ex-num n-teal">3</div>
-      <div><div class="ex-name">DB Shoulder Press</div><div class="ex-alt">นั่งดันดัมเบล (ไหล่สวยช่วยให้แขนดูเรียว)</div><div class="ex-tags"><span class="tag tag-m">ไหล่</span><span class="tag tag-t">ไม่แอ่นหลัง</span></div></div>
-      <div><div class="ex-sets">3 เซต</div><div class="ex-reps">10–12 ครั้ง</div></div>
-    </div>
-    <div class="section-head">Accessory & Core</div>
-    <div class="ex-row">
-      <div class="ex-num n-teal">4</div>
-      <div><div class="ex-name">Reverse Lunge</div><div class="ex-alt">ก้าวขาถอยหลังย่อตัว (เซฟเข่ากว่าก้าวไปหน้า)</div><div class="ex-tags"><span class="tag tag-m">ก้น</span><span class="tag tag-m">ต้นขา</span></div></div>
-      <div><div class="ex-sets">3 เซต</div><div class="ex-reps">10 ต่อข้าง</div></div>
-    </div>
-    <div class="ex-row">
-      <div class="ex-num n-teal">5</div>
-      <div><div class="ex-name">Tricep Pushdown</div><div class="ex-alt">ใช้เคเบิลกดลง (แก้ปัญหาท้องแขนห้อยย้วย)</div><div class="ex-tags"><span class="tag tag-m">หลังแขน</span><span class="tag tag-t">ศอกชิดลำตัว</span></div></div>
-      <div><div class="ex-sets">3 เซต</div><div class="ex-reps">12–15 ครั้ง</div></div>
-    </div>
-    <div class="ex-row">
-      <div class="ex-num n-teal">6</div>
-      <div><div class="ex-name">Dead Bug</div><div class="ex-alt">นอนหงายสลับแขนขา (ปลอดภัยต่อหลังล่าง)</div><div class="ex-tags"><span class="tag tag-m">หน้าท้องด้านใน</span><span class="tag tag-t">หลังแนบพื้น</span></div></div>
-      <div><div class="ex-sets">3 เซต</div><div class="ex-reps">10 ต่อข้าง</div></div>
-    </div>
-    <div class="rest-note">⏱ พักระหว่างเซต 60–90 วิ · รวม ~55 นาที</div>
-  </div>
-
-  <div class="panel" id="panel-3">
-    <div class="focus-bar fb-gray"><span class="focus-icon">🧘‍♀️</span><span><strong>ยืดเหยียด — แก้ออฟฟิศซินโดรม</strong> · ปรับสมดุลร่างกาย ทำหลังเลิกงานได้เลย</span></div>
-    <div class="section-head">Upper body &amp; Neck</div>
-    <div class="ex-row">
-      <div class="ex-num n-gray">1</div>
-      <div><div class="ex-name">Neck Roll + Side Stretch</div><div class="ex-alt">หมุนคอช้าๆ 5 รอบ แล้วเอียงค้างไว้</div><div class="ex-tags"><span class="tag tag-m">คอ</span><span class="tag tag-m">บ่า</span></div></div>
-      <div><div class="ex-sets">2 เซต</div><div class="ex-reps">30 วิ ต่อข้าง</div></div>
-    </div>
-    <div class="ex-row">
-      <div class="ex-num n-gray">2</div>
-      <div><div class="ex-name">Chest Opener (Doorway Stretch)</div><div class="ex-alt">ยืนพิงกรอบประตู กางแขนออก</div><div class="ex-tags"><span class="tag tag-m">อก</span><span class="tag tag-m">ไหล่หน้า</span><span class="tag tag-t">แก้หลังค่อม</span></div></div>
-      <div><div class="ex-sets">3 เซต</div><div class="ex-reps">30 วิ</div></div>
-    </div>
-    <div class="ex-row">
-      <div class="ex-num n-gray">3</div>
-      <div><div class="ex-name">Thoracic Rotation</div><div class="ex-alt">นอนตะแคง เอาเข่าชิดกัน หมุนลำตัวบน</div><div class="ex-tags"><span class="tag tag-m">หลังกลาง</span><span class="tag tag-t">แก้ปวดหลัง</span></div></div>
-      <div><div class="ex-sets">2 เซต</div><div class="ex-reps">10 ต่อข้าง</div></div>
-    </div>
-    <div class="section-head">Lower body &amp; Hip</div>
-    <div class="ex-row">
-      <div class="ex-num n-gray">4</div>
-      <div><div class="ex-name">Hip Flexor Stretch (Kneeling Lunge)</div><div class="ex-alt">คุกเข่าขาหน้า ดันสะโพกไปข้างหน้า</div><div class="ex-tags"><span class="tag tag-m">สะโพกหน้า</span><span class="tag tag-t">สำคัญมากสำหรับคนนั่งนาน</span></div></div>
-      <div><div class="ex-sets">3 เซต</div><div class="ex-reps">45 วิ ต่อข้าง</div></div>
-    </div>
-    <div class="ex-row">
-      <div class="ex-num n-gray">5</div>
-      <div><div class="ex-name">Pigeon Pose</div><div class="ex-alt">ยืดสะโพกด้านนอก ดีมากสำหรับคนนั่งทำงาน</div><div class="ex-tags"><span class="tag tag-m">สะโพก</span><span class="tag tag-m">ก้น</span></div></div>
-      <div><div class="ex-sets">2 เซต</div><div class="ex-reps">45 วิ ต่อข้าง</div></div>
-    </div>
-    <div class="section-head">Spine</div>
-    <div class="ex-row">
-      <div class="ex-num n-gray">6</div>
-      <div><div class="ex-name">Cat-Cow</div><div class="ex-alt">คลายกระดูกสันหลังทั้งแนว</div><div class="ex-tags"><span class="tag tag-m">กระดูกสันหลัง</span><span class="tag tag-m">หลังล่าง</span></div></div>
-      <div><div class="ex-sets">2 เซต</div><div class="ex-reps">10 รอบ</div></div>
-    </div>
-    <div class="rest-note">⏱ รวม ~20 นาที · ไม่ต้องบีบแรงเจ็บ ยืดแค่รู้สึกตึงพอ</div>
-  </div>
-
-  <div class="panel" id="panel-4">
-    <div class="focus-bar fb-red"><span class="focus-icon">🔥</span><span><strong>Full Body C — Glute & Toning</strong> · เน้นปั้นก้นโดยเฉพาะ + เก็บตกส่วนบน</span></div>
-    <div class="section-head">Compound</div>
+    <div class="focus-bar fb-red"><span class="focus-icon">🔥</span><div><strong>Full Body — เผาพุง กระชับทุกส่วน</strong><br><span style="font-size:11px;opacity:.8">Machine + Cable · ~50 นาที</span></div></div>
+    <div class="tip-bar-blue">💡 <strong>เทคนิคเผาพุง:</strong> Ab Crunch + Cable Woodchop ตรงกว่า crunch พื้น ใช้ machine ได้แรงต้านสม่ำเสมอ</div>
+    <div class="section-head">Core — เผาพุง สีข้าง เอว</div>
     <div class="ex-row">
       <div class="ex-num n-red">1</div>
-      <div><div class="ex-name">Hip Thrust</div><div class="ex-alt">ใช้เครื่อง / หรือวางบาร์เบล-ดัมเบลบนหน้าตัก</div><div class="ex-tags"><span class="tag tag-m">ก้นแบบเต็มๆ</span><span class="tag tag-t">บีบก้นสุดด้านบน</span></div></div>
-      <div><div class="ex-sets">3 เซต</div><div class="ex-reps">12–15 ครั้ง</div></div>
+      <div><div class="ex-name">Ab Crunch Machine</div><div class="ex-alt">ม้วนหน้าท้อง บีบแน่นค้างไว้ 1 วิที่ต่ำสุด</div><div class="ex-tags"><span class="tag tag-m">หน้าท้อง</span><span class="tag tag-fire">เผาพุง</span></div></div>
+      <div><div class="ex-sets">4 เซต</div><div class="ex-reps">20 ครั้ง</div></div>
     </div>
     <div class="ex-row">
       <div class="ex-num n-red">2</div>
-      <div><div class="ex-name">Leg Press Machine</div><div class="ex-alt">วางเท้าสูงหน่อยจะโดนก้นมากขึ้น</div><div class="ex-tags"><span class="tag tag-m">ต้นขารวมๆ</span><span class="tag tag-m">ก้น</span></div></div>
-      <div><div class="ex-sets">3 เซต</div><div class="ex-reps">10–12 ครั้ง</div></div>
+      <div><div class="ex-name">Cable Woodchop (High to Low)</div><div class="ex-alt">ดึงสายจากบนลงล่างแนวทแยง บิดเอวตาม</div><div class="ex-tags"><span class="tag tag-m">สีข้าง</span><span class="tag tag-m">เอว</span><span class="tag tag-fire">ลด love handle</span></div></div>
+      <div><div class="ex-sets">3 เซต</div><div class="ex-reps">15 ต่อข้าง</div></div>
     </div>
+    <div class="section-head">Compound — ขา + บน รวม</div>
     <div class="ex-row">
       <div class="ex-num n-red">3</div>
-      <div><div class="ex-name">Incline Push-up</div><div class="ex-alt">วิดพื้นแบบมือวางบนม้านั่งหรือบาร์สูง (ง่ายกว่าพื้น)</div><div class="ex-tags"><span class="tag tag-m">อก</span><span class="tag tag-m">ไหล่</span><span class="tag tag-m">Core</span></div></div>
-      <div><div class="ex-sets">3 เซต</div><div class="ex-reps">8–12 ครั้ง</div></div>
+      <div><div class="ex-name">Leg Press Machine</div><div class="ex-alt">rep สูง น้ำหนักเบา เผาแคลฯ มากกว่าสร้างขนาด</div><div class="ex-tags"><span class="tag tag-m">ต้นขา</span><span class="tag tag-m">ก้น</span></div></div>
+      <div><div class="ex-sets">3 เซต</div><div class="ex-reps">20 ครั้ง</div></div>
     </div>
-    <div class="section-head">Accessory</div>
     <div class="ex-row">
       <div class="ex-num n-red">4</div>
-      <div><div class="ex-name">Face Pull</div><div class="ex-alt">ดึงสายเคเบิลเข้าหาหน้าผาก (ปรับบุคลิกให้สง่างาม)</div><div class="ex-tags"><span class="tag tag-m">ไหล่หลัง</span><span class="tag tag-m">หลังส่วนบน</span></div></div>
-      <div><div class="ex-sets">3 เซต</div><div class="ex-reps">15 ครั้ง</div></div>
+      <div><div class="ex-name">Chest Press Machine</div><div class="ex-alt">ดันออกช้า 3 วิ กลับช้า 3 วิ (กระชับอก)</div><div class="ex-tags"><span class="tag tag-m">อก</span><span class="tag tag-m">หลังแขน</span></div></div>
+      <div><div class="ex-sets">3 เซต</div><div class="ex-reps">12–15 ครั้ง</div></div>
     </div>
     <div class="ex-row">
       <div class="ex-num n-red">5</div>
-      <div><div class="ex-name">DB Lateral Raise</div><div class="ex-alt">กางแขนยกดัมเบลขึ้นข้างลำตัว</div><div class="ex-tags"><span class="tag tag-m">ไหล่ข้าง</span><span class="tag tag-t">ใช้น้ำหนักเบา</span></div></div>
+      <div><div class="ex-name">Hip Thrust Machine</div><div class="ex-alt">ดันสะโพกขึ้น บีบก้นสุดทาง</div><div class="ex-tags"><span class="tag tag-m">ก้น</span></div></div>
       <div><div class="ex-sets">3 เซต</div><div class="ex-reps">15 ครั้ง</div></div>
     </div>
-    <div class="rest-note">⏱ พักระหว่างเซต 60–90 วิ · รวม ~50 นาที สู้ๆ วันสุดท้ายของวีค!</div>
+    <div class="ex-row">
+      <div class="ex-num n-red">6</div>
+      <div><div class="ex-name">Incline Walk Finisher</div><div class="ex-alt">ชัน 10% เดินปิดท้าย เผาไขมันส่วนที่เหลือ</div><div class="ex-tags"><span class="tag tag-m">เผาแคลฯ</span></div></div>
+      <div><div class="ex-sets">1 เซต</div><div class="ex-reps">15 นาที</div></div>
+    </div>
+    <div class="rest-note">⏱ พักระหว่างเซต 60 วิ · รวม ~50 นาที</div>
   </div>
 
-  <div class="panel" id="panel-5">
-    <div class="focus-bar fb-amber"><span class="focus-icon">🎉</span><span><strong>วันเสาร์ — วันพักผ่อนให้รางวัลตัวเอง</strong></span></div>
+  <!-- THU: Cardio -->
+  <div class="panel" id="panel-3">
+    <div class="focus-bar fb-blue"><span class="focus-icon">🏃</span><div><strong>คาร์ดิโอ — เผาไขมัน Round 2</strong><br><span style="font-size:11px;opacity:.8">สลับแบบกับวันอังคารเพื่อไม่ให้ร่างกายชิน</span></div></div>
+    <div class="cardio-block">
+      <div class="cardio-title">🚴 Bike / Elliptical — 30–40 นาที</div>
+      <div class="cardio-sub">วันนี้เปลี่ยนจาก incline walk เป็น bike หรือ elliptical<br>ร่างกายไม่ชิน เผาแคลฯ ได้ต่อเนื่อง</div>
+    </div>
+    <div class="cardio-block">
+      <div class="cardio-title">💡 Bonus Core — 10 นาที (ถ้ายังมีแรง)</div>
+      <div class="cardio-sub">Ab Crunch Machine: 3 เซต × 20 ครั้ง<br>Cable Woodchop: 3 เซต × 15 ต่อข้าง</div>
+    </div>
+    <div class="rest-note">⏱ รวม ~40–50 นาที · พรุ่งนี้วันปาร์ตี้ ไม่ต้องเก็บแรง 🎉</div>
+  </div>
+
+  <!-- FRI: Party -->
+  <div class="panel" id="panel-4">
+    <div class="focus-bar fb-amber"><span class="focus-icon">🎉</span><span><strong>วันศุกร์ — ให้รางวัลตัวเอง</strong></span></div>
     <div class="rest-big">
       <span class="rest-emoji">🍻</span>
       ไม่มีโปรแกรมวันนี้<br>
-      <span style="font-size:12px; color:var(--color-text-tertiary)">ไปเที่ยว ปาร์ตี้ หรือกินของอร่อยๆ<br>พยายามกินโปรตีนให้ถึงในมื้ออื่นๆ ก็พอครับ ✨</span>
+      <span style="font-size:12px; color:var(--color-text-tertiary, #aaa)">ไปปาร์ตี้ สนุกได้เต็มที่<br>พยายามดื่มน้ำเยอะๆ ระหว่างดื่มแอลกอฮอล์ด้วยนะ ✨</span>
     </div>
   </div>
 
+  <!-- SAT: Lower A -->
+  <div class="panel" id="panel-5">
+    <div class="focus-bar fb-orange"><span class="focus-icon">🦵</span><div><strong>Lower Body A — ลดต้นขา กระชับก้น</strong><br><span style="font-size:11px;opacity:.8">Machine ทั้งหมด · พักระหว่างเซต 60 วิ · ~45 นาที</span></div></div>
+    <div class="tip-bar" style="background:#FFF0E5; border-color:#FFC49A; color:#8C3A00;">💡 <strong>เทคนิคลดต้นขา:</strong> ใช้ rep สูง (15–20) น้ำหนักเบา-กลาง เผาแคลฯ และกระชับโดยไม่เพิ่มขนาด</div>
+    <div class="section-head">Main — ขาและก้น</div>
+    <div class="ex-row">
+      <div class="ex-num n-orange">1</div>
+      <div><div class="ex-name">Leg Press Machine</div><div class="ex-alt">วางเท้าแคบ-กลาง กดขาออกช้าๆ นับ 3 วิ</div><div class="ex-tags"><span class="tag tag-m">ต้นขา</span><span class="tag tag-m">ก้น</span><span class="tag tag-t">ช้าลงช่วยเผาแคลฯ</span></div></div>
+      <div><div class="ex-sets">4 เซต</div><div class="ex-reps">15–20 ครั้ง</div></div>
+    </div>
+    <div class="ex-row">
+      <div class="ex-num n-orange">2</div>
+      <div><div class="ex-name">Leg Curl Machine</div><div class="ex-alt">พับขาเข้าหาก้น (หลังขาตึง = เผาไขมันหลังต้นขา)</div><div class="ex-tags"><span class="tag tag-m">หลังต้นขา</span><span class="tag tag-fire">จุดสะสมไขมัน</span></div></div>
+      <div><div class="ex-sets">4 เซต</div><div class="ex-reps">15 ครั้ง</div></div>
+    </div>
+    <div class="ex-row">
+      <div class="ex-num n-orange">3</div>
+      <div><div class="ex-name">Hip Abductor Machine</div><div class="ex-alt">กางขาออกด้านข้าง กระชับต้นขาด้านนอก</div><div class="ex-tags"><span class="tag tag-m">ต้นขาด้านนอก</span><span class="tag tag-m">สะโพก</span></div></div>
+      <div><div class="ex-sets">3 เซต</div><div class="ex-reps">20 ครั้ง</div></div>
+    </div>
+    <div class="ex-row">
+      <div class="ex-num n-orange">4</div>
+      <div><div class="ex-name">Hip Adductor Machine</div><div class="ex-alt">หนีบขาเข้าหากัน ลดต้นขาด้านใน (inner thigh)</div><div class="ex-tags"><span class="tag tag-m">ต้นขาด้านใน</span><span class="tag tag-fire">จุดสะสมไขมัน</span></div></div>
+      <div><div class="ex-sets">3 เซต</div><div class="ex-reps">20 ครั้ง</div></div>
+    </div>
+    <div class="ex-row">
+      <div class="ex-num n-orange">5</div>
+      <div><div class="ex-name">Cable Kickback</div><div class="ex-alt">คล้องข้อเท้ากับสายเคเบิล เตะขาไปด้านหลัง</div><div class="ex-tags"><span class="tag tag-m">ก้น</span><span class="tag tag-t">บีบก้นสุดทาง</span></div></div>
+      <div><div class="ex-sets">3 เซต</div><div class="ex-reps">15 ต่อข้าง</div></div>
+    </div>
+    <div class="rest-note">⏱ ต่อด้วยเดินบนลู่วิ่ง incline 10 นาที หลังเทรนเพื่อเผาไขมันเพิ่ม</div>
+  </div>
+
+  <!-- SUN: Rest -->
   <div class="panel" id="panel-6">
     <div class="focus-bar fb-gray"><span class="focus-icon">😴</span><span><strong>พักเต็มที่ — ร่างกายสร้างกล้ามเนื้อตอนนี้</strong></span></div>
     <div class="rest-big">
       <span class="rest-emoji">💤</span>
       ไม่มีโปรแกรมวันนี้<br>
-      <span style="font-size:12px; color:var(--color-text-tertiary)">นอน 7–8 ชม. · ดื่มน้ำเยอะๆ · เตรียมพร้อมร่างกาย<br>สำหรับการเทรนในวันจันทร์หน้า</span>
+      <span style="font-size:12px; color:var(--color-text-tertiary, #aaa)">นอน 7–8 ชม. · ดื่มน้ำเยอะๆ<br>กินโปรตีนให้ครบ เตรียมพร้อมสำหรับวันจันทร์</span>
     </div>
   </div>
 </div>
 
 <script>
-  var styles = ['act-purple','act-pink','act-teal','act-gray','act-red','act-amber','act-rest'];
+  var styles = ['act-green','act-pink','act-red','act-blue','act-amber','act-orange','act-gray'];
   function show(i) {
     for(var d=0;d<7;d++){
       document.getElementById('panel-'+d).classList.toggle('show', d===i);
